@@ -14,22 +14,22 @@ module.exports = {
     this.appOptions = app.options['ember-cli-chartist'] || {};
 
     if (!this.appOptions.useCustomCSS) {
-      app.import('vendor/chartist.css');
+      app.import(`${this.chartistPath}/index.css`);
     }
   },
 
   treeForVendor(vendorTree) {
     const chartistTree = new Funnel(this.chartistPath, {
-      files: ['chartist.css'],
+      files: ['index.css'],
+      destDir: 'chartist'
     });
-
     return vendorTree ? mergeTrees([vendorTree, chartistTree]) : chartistTree;
   },
 
   treeForStyles(stylesTree) {
     if (this.appOptions.useCustomCSS) {
       const chartistTree = new Funnel(this.chartistPath, {
-        srcDir: 'scss',
+        srcDir: '',
         destDir: 'chartist',
       });
 
